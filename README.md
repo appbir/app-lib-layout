@@ -9,7 +9,7 @@
 # 本机运行demo
 1. 安装、编译、部署
 ```
- cd node_modules/appbir-layout
+ cd node_modules/appbir-layout/example/
  npm i
  npm start
 ```
