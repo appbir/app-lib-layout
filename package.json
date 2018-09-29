@@ -1,0 +1,74 @@
+{
+  "name": "appbir-layout",
+  "version": "1.0.6",
+  "description": "layout you PC web applation",
+  "scripts": {
+    "build": "npm run dev-umd && npm run prod-umd && npm run dev-bundle && npm run prod-bundle",
+    "dev-umd": "webpack --config  webpack.umd.config.js --progress --profile --colors",
+    "prod-umd": "webpack --config  webpack.umd.config.js --progress --profile --colors -p",
+    "prod-bundle": "webpack --config  webpack.bundle.config.js  --progress --profile --colors -p",
+    "dev-bundle": "webpack --config  webpack.bundle.config.js  --progress --profile --colors",
+    "test": "jest --coverage --verbose",
+    "test-init": "jest -u --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appbir/appbir-layout.git"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__jest__/__mocks__/fileMock.js",
+      ".*\\.(css|less|scss)$": "identity-obj-proxy"
+    }
+  },
+  "keywords": [
+    "app",
+    "appbir",
+    "layout",
+    "appbir-layout"
+  ],
+  "author": "appbir",
+  "email": "appbir@163.com.cn",
+  "license": "ISC",
+  "main": "./dist/umd/app-layout.min",
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-jest": "22.1.0",
+    "babel-loader": "7.1.2",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "clean-webpack-plugin": "0.1.19",
+    "css-loader": "0.28.8",
+    "enzyme": "3.3.0",
+    "file-loader": "1.1.6",
+    "html-webpack-plugin": "2.30.1",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "22.1.0",
+    "less": "2.7.3",
+    "less-loader": "4.0.5",
+    "react-test-renderer": "16.2.0",
+    "style-loader": "0.19.1",
+    "url-loader": "0.6.2",
+    "webpack": "3.10.0",
+    "webpack-dev-server": "2.11.0",
+    "webpack-node-externals": "1.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/appbir/appbir-layout/issues"
+  },
+  "homepage": "https://github.com/appbir/appbir-layout#readme",
+  "dependencies": {
+    "react": "16.5.2",
+    "react-dom": "16.5.2"
+  }
+}

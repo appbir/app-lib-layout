@@ -1,0 +1,5 @@
+const MODULE_NAME="LAYOUT_DEMO"
+
+export const CHANGE_KEY = MODULE_NAME + 'CHANGE_KEY';
+
+export const OVERFLOW = MODULE_NAME + 'OVERFLOW'; 
