@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Table,Select,Input,Col} from 'antd';
-import {POSITION} from '../../layout/layout.jsx';
+import {POSITION} from 'appbir-layout';
 import Overflow from './overflow.jsx';
 const Option = Select.Option;
 

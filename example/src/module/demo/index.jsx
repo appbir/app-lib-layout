@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
 import Layout from 'appbir-layout';
+// import Layout from './layout.jsx';
 import Content from './content/index.jsx';
 import Header from './part/header.jsx';
 import Left from './part/left.jsx';

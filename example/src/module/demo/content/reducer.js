@@ -1,9 +1,5 @@
 import {CHANGE_KEY,OVERFLOW} from './constant';
-import {POSITION} from '../../layout/layout.jsx';
-// const POSITION = {
-//     FULL:'FULL',
-//     AUTO:'AUTO',
-// }
+import {POSITION} from 'appbir-layout';
 
 const initState = {
     width:'100vw',

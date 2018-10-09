@@ -39,6 +39,7 @@
     "html-webpack-plugin": "3.2.0",
     "immutable": "3.8.2",
     "jquery": "3.3.1",
+    "less": "3.8.1",
     "less-loader": "4.1.0",
     "less-plugin-autoprefix": "1.5.1",
     "lodash": "4.17.5",
@@ -56,16 +57,18 @@
     "uglifyjs-webpack-plugin": "1.1.1",
     "url": "0.11.0",
     "url-loader": "0.6.2",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.9"
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.1",
+    "webpack-dev-server": "3.1.9"
   },
   "bugs": {
     "url": "https://github.com/appbir/app-layout/issues"
   },
   "homepage": "https://github.com/appbir/app-layout#readme",
   "dependencies": {
-    "antd": "^3.5.4",
-    "appbir-layout": "^1.0.5"
+    "antd": "3.5.4",
+    "appbir-layout": "^1.0.5",
+    "core-js": "2.5.7",
+    "moment": "2.22.2"
   }
 }

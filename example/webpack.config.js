@@ -59,7 +59,7 @@ const config = {
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new HTMLWebpackPlugin({title: 'appbir_layout'})
+        new HTMLWebpackPlugin({title: 'appbir_layout',template:'./template.html'})
     ]
 };
 
