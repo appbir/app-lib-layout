@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Layout from 'appbir-layout';
-import Layout from './layout.jsx';
+import Layout, {POSITION} from './layout.jsx';
 import ConfigPanel from './content/content.jsx';
 import Header from './part/header.jsx';
 import Left from './part/left.jsx';
@@ -29,10 +29,9 @@ class LayoutBoilerplate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            style: {
-                width: '100vw',
-                height: '100vh',
-            },
+            // model: true, // DIY 模型支持自定义宽度和高度 FULL 表示全浏览器满屏  默认FULL
+            model:'FULL',
+            style: null, // DIY模式下自定义内容
             showConfig:false, // 显示配置文本格式
             overflow: false,
             config: {
@@ -65,13 +64,26 @@ class LayoutBoilerplate extends React.Component {
         this.setState({ style: newStyle });
     }
 
+    onModelChange=(isCheck)=>{
+        console.log(isCheck);
+        let style= isCheck ? null  : {
+            minHeight:"0px",
+            width:'1600px',
+            height:'900px'
+        };
+        this.setState({model:isCheck? 'FULL' : 'DIY',style})
+        // this.setState({model:isCheck ? 'FULL':"DIY"})
+    }
+  
 
     render() {
-        let { config,showConfig } = this.state;
-
+        let { config,showConfig,style,model} = this.state;
+    // <div className="inner2">
         return (
-            <div >
-                < Layout config={config} >
+        
+             <div className="inner"> 
+             {/* 避免flex布局污染 */}
+                < Layout config={config} style={style} model = {model} >
                     <Content>
                         <ConfigPanel onChange={this.onChange}
                             onOverflow={this.onOverflow}
@@ -79,6 +91,8 @@ class LayoutBoilerplate extends React.Component {
                             config={config}
                             onShowconfig={showConfig=>this.setState({showConfig})}
                             showConfig={showConfig}
+                            model={model==='FULL'}
+                            onModel = {this.onModelChange}
                              />
                     </Content>
                     <Header />

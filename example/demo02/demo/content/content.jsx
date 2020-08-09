@@ -6,7 +6,7 @@ import ShowConfig from './showConfig.jsx';
 
 const Option = Select.Option;
 
-const Content = ({onChange,config,overflow,onOverflow,onShowconfig,showConfig}) => {
+const Content = ({onChange,config,overflow,onOverflow,onShowconfig,showConfig,model,onModel}) => {
 
     const changeEle = (key,value)=>{
         onChange(key,value);
@@ -77,11 +77,12 @@ const Content = ({onChange,config,overflow,onOverflow,onShowconfig,showConfig}) 
       }];
     return (<div>
         <center>
+        <Switch checkedChildren="DIY" unCheckedChildren="FULL" checked={model} onChange={onModel}/>
           <Switch checkedChildren="overflow" unCheckedChildren="overflow" checked={overflow} onChange={onOverflow}/>
           <Switch checkedChildren="json" unCheckedChildren="json" checked={showConfig} onChange={onShowconfig}/>
         </center>
         <Table rowKey="name" columns={columns} pagination={false} dataSource={showTableData} />
-        {showConfig && <ShowConfig  content= {config}/>}
+        {showConfig && <ShowConfig  config= {config}/>}
         {overflow && <Overflow/>}
     </div>)
 }

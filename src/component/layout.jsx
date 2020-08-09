@@ -1,12 +1,22 @@
+/**
+ *  该布局适合整站布局
+ *  ---------------------
+ *  如果想局部布局，则可以使用auto 或者diy模式 (TODO 该两种模式还未完全成熟)
+ * 
+ *  局部布局需要使用style传递对应的miniheight 最小高度  或者使用样式覆盖
+ * 
+ *  有必要场景可扩展排序规则
+ */
+
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * FULL: full layout include priority
- * AUTO: 100% 
+ * AUTO: 100%  按照外层百分比进行
  * DIY : define you width or height
  */
-export const POSITION = { FULL: 'FULL', AUTO: 'AUTO' }
+export const POSITION = { FULL: 'FULL', AUTO: 'AUTO', 'DIY': 'DIY' }
 
 const PARTS = {
     // 最外层容器 最大容器
@@ -80,16 +90,29 @@ const integrate = (integration, part, name) => {
     isIntegrate(name, true) && (integration.width = add(integration.width, part.width));
 }
 
-const isFull = (name, config, isHeight) => (config[name] || false) &&
-    (isHeight ? config[name].height === POSITION.FULL : config[name].width === POSITION.FULL)
+// 是否满屏
+const isFull = (name, config, isHeight) => {
+    return (config[name] || false) &&
+        (isHeight ? config[name].height === POSITION.FULL : config[name].width === POSITION.FULL)
+}
 
-const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName', config = {}, children }) => {
 
+const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName', config = {}, children, style = {}, model = POSITION.FULL }) => {
+    // 是否为全屏模式
+    let isFullModel = model === POSITION.FULL;
     let cfg = {};
     for (let name in config) {
         let partCfg = config[name];
         partCfg.visiabled && (cfg[name] = partCfg)
     }
+
+    /**
+     * 根据模型 返回固定位置类型
+     */
+    const getFixedPosition = () => {
+        return model !== POSITION.FULL ? 'absolute' : 'fixed';
+    }
+
     // 计算样式
     const calcStyle = config => {
         let styles = [];
@@ -107,7 +130,11 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             // 2: tips 如果指定高度  则超出宽度不会被布局
             minHeight: '100vh',
             display: 'flex',
-            flexDirection: mainIsRow ? 'row' : 'column'
+            width: '100%',
+            height: '100%',
+            flexDirection: mainIsRow ? 'row' : 'column',
+            position: model == POSITION.FULL ? 'static' : 'relative',
+            ...style // 支持自定义样式
         };
         styles.push({ name: PARTS.MAIN_CONTAINER, style: mainStyle, parent: null });
 
@@ -132,6 +159,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             let leftRightContainerStyle = {
                 flex: 1,
                 display: 'flex',
+                position: 'relative',
                 flexDirection: 'column',
             };
 
@@ -158,7 +186,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
 
             if (headerConfig.fixed) {
                 headerStyle = {
-                    position: 'fixed',
+                    position: getFixedPosition(),
                     width: '100%',
                     zIndex: headerConfig.zIndex,
                     height: headerConfig.height
@@ -178,7 +206,8 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
                 let containerStyle = {
                     flex: 1,
                     display: 'flex',
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    position: 'relative',
                 }
 
                 if (integration.height) {
@@ -202,7 +231,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             };
             if (leftConfig.fixed) {
                 leftStyle = {
-                    position: 'fixed',
+                    position: getFixedPosition(),
                     width: leftConfig.width,
                     height: '100%',
                     zIndex: leftConfig.zIndex
@@ -266,7 +295,8 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             let cContainerStyle = {
                 display: 'flex',
                 flexDirection: 'column',
-                flex: '1 1'
+                flex: '1 1',
+                position: 'relative'
             }
             if (!isLeft && integration.width) {
                 cContainerStyle.marginLeft = integration.width;
@@ -300,7 +330,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
                     // width:'calc(100vw - '+ calcWidth +')',
                     width: '100%',
                     height: content_headerConfig.height,
-                    position: 'fixed',
+                    position: getFixedPosition(),
                     zIndex: content_headerConfig.zIndex
                 }
                 isContentHeader = content_headerConfig.height;
@@ -338,7 +368,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             };
             if (rightConfig.fixed) {
                 rightStyle = {
-                    position: 'fixed',
+                    position: getFixedPosition(),
                     width: rightConfig.width,
                     zIndex: rightConfig.zIndex,
                     height: '100%',
@@ -366,7 +396,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             };
             if (bottomConfig.fixed) {
                 bottomStyle = {
-                    position: 'fixed',
+                    position: getFixedPosition(),
                     width: '100%',
                     zIndex: bottomConfig.zIndex,
                     height: bottomConfig.height,
@@ -374,7 +404,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
                 }
             }
             if (bottomNode === mainNode && integration.width) {
-                if (!isFull(PARTS.BOTTOM, cfg)) {
+                if (!isFull(PARTS.BOTTOM, cfg) && isFullModel) { // 非全屏情况
                     bottomStyle.marginLeft = integration.width;
                 }
             }
