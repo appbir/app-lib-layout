@@ -5,4 +5,4 @@ __jest__/
 .gitignore
 */package-lock.json
 */node_modules/
-./example/
+example/

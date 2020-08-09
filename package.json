@@ -1,6 +1,6 @@
 {
   "name": "appbir-layout",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "description": "layout you PC web applation",
   "scripts": {
     "build": "npm run publish && npm run prod-umd && npm run dev-bundle && npm run prod-bundle",
@@ -67,8 +67,6 @@
   },
   "homepage": "https://github.com/appbir/appbir-layout#readme",
   "dependencies": {
-    "cssnano": "^4.1.10",
-    "optimize-css-assets-webpack-plugin": "^3.2.0",
     "react": "16.5.2",
     "react-dom": "16.5.2"
   }
