@@ -68,7 +68,7 @@
   },
   "homepage": "https://github.com/appbir/app-layout#readme",
   "dependencies": {
-    "antd": "3.5.4",
+    "antd": "^3.26.18",
     "appbir-layout": "^2.0.2",
     "core-js": "2.5.7",
     "moment": "2.22.2"

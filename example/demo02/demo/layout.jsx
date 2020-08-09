@@ -136,6 +136,12 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             position: model == POSITION.FULL ? 'static' : 'relative',
             ...style // 支持自定义样式
         };
+
+        // 非全屏模式不设置制动
+        if(!isFullModel){
+            mainStyle.minHeight = '0px'
+        }
+
         styles.push({ name: PARTS.MAIN_CONTAINER, style: mainStyle, parent: null });
 
         // 指针节点
