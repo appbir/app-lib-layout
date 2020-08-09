@@ -18,7 +18,7 @@ import React from 'react';
  */
 export const POSITION = { FULL: 'FULL', AUTO: 'AUTO', 'DIY': 'DIY' }
 
-const PARTS = {
+export const PARTS = {
     // 最外层容器 最大容器
     MAIN_CONTAINER: 'main_container',
     // 辅助左右布局容器
@@ -138,7 +138,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
         };
 
         // 非全屏模式不设置制动
-        if(!isFullModel){
+        if (!isFullModel) {
             mainStyle.minHeight = '0px'
         }
 
@@ -457,9 +457,11 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
 }
 
 Layout.PropTypes = {
-    classNamePrefix: PropTypes.string,
-    targetName: PropTypes.string,
-    config: PropTypes.object
+    classNamePrefix: PropTypes.string, // 样式前缀 避免样式冲突
+    targetName: PropTypes.string, // 指定组件属于那部分 PARTS 对应的部分
+    config: PropTypes.object, // 各模块的布局配置
+    model: PropTypes.string, // POSITION 的三种状态  FULL 、AUTO 、DIY 默认FULL
+    style: PropTypes.object,  // DIY 模式下的样式 控制layout的主体部分
 }
 
 export default Layout;

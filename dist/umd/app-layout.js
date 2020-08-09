@@ -92,7 +92,7 @@ module.exports = __webpack_require__(1);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.arrayToTree = exports.POSITION = undefined;
+exports.arrayToTree = exports.PARTS = exports.POSITION = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
                                                                                                                                                                                                                                                                    *  该布局适合整站布局
@@ -121,7 +121,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 var POSITION = exports.POSITION = { FULL: 'FULL', AUTO: 'AUTO', 'DIY': 'DIY' };
 
-var PARTS = {
+var PARTS = exports.PARTS = {
     // 最外层容器 最大容器
     MAIN_CONTAINER: 'main_container',
     // 辅助左右布局容器
@@ -565,9 +565,11 @@ var Layout = function Layout(_ref) {
 };
 
 Layout.PropTypes = {
-    classNamePrefix: _propTypes2.default.string,
-    targetName: _propTypes2.default.string,
-    config: _propTypes2.default.object
+    classNamePrefix: _propTypes2.default.string, // 样式前缀 避免样式冲突
+    targetName: _propTypes2.default.string, // 指定组件属于那部分 PARTS 对应的部分
+    config: _propTypes2.default.object, // 各模块的布局配置
+    model: _propTypes2.default.string, // POSITION 的三种状态  FULL 、AUTO 、DIY 默认FULL
+    style: _propTypes2.default.object // DIY 模式下的样式 控制layout的主体部分
 };
 
 exports.default = Layout;
