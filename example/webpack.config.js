@@ -6,7 +6,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const config = {
     mode:'development',
     devtool: 'inline-source-map',
-    entry:'./src/core/index.js',
+    // entry:'./src/core/index.js', // old
+    entry:'./demo02/index.js',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -26,7 +27,8 @@ const config = {
                     }
                 },                
                 include: [
-                    path.join(__dirname, 'src')
+                    path.join(__dirname, 'src'),
+                    path.join(__dirname, 'demo02')
                 ],
                 exclude: /(aaa)/
             },

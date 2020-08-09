@@ -8,16 +8,9 @@ const config = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        index: './src/core/index.js',
+           // entry:'./src/core/index.js', // old
+        entry:'./demo02/index.js',
         'c-react': ['react', 'react-dom'],
-        'c-redux': [
-            'redux',
-            'redux-immutable',
-            'redux-immutable-reducer',
-            'redux-logger',
-            'redux-thunk',
-            'redux-undo'
-        ],
         'antd':['antd']
     },
     output: {
@@ -39,7 +32,8 @@ const config = {
                 }
             },
             include: [
-                path.join(__dirname, 'src')
+                path.join(__dirname, 'src'),
+                path.join(__dirname, 'demo')
             ],
             exclude: /(aaa)/
         },
@@ -71,7 +65,7 @@ const config = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['../docs']),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
           }),
