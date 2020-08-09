@@ -1,8 +1,8 @@
-node_modules/
+
 __jest__/
 .git/
-package-lock.json
 .npmignore
 .gitignore
-example/package-lock.json
-example/node_modules
+*/package-lock.json
+*/node_modules/
+./example/

@@ -1,5 +1,6 @@
 const path = require('path');
 const DEV_ENV = (process.argv.indexOf("-p") < 0);
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         "app-layout-bundle": './src/bundle.js'
@@ -45,6 +46,7 @@ module.exports = {
         }]
     },
     plugins: [
+        new UglifyJsPlugin(),
     ],
 
     devtool: "source-map",

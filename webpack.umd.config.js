@@ -1,5 +1,7 @@
 const path = require('path');
 const DEV_ENV = (process.argv.indexOf("-p") < 0);
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 module.exports = {
     entry: {
         "app-layout": './src/index'
@@ -47,7 +49,12 @@ module.exports = {
             }
         ]
     },
-    plugins: [],
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+          }),
+        // new UglifyJsPlugin(), //  TypeError: Cannot read property 'compilation' of undefined
+    ],
     devtool: "source-map",
     resolve: {
         extensions: [".js", ".json", ".jsx", ".css"],

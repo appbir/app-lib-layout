@@ -6,12 +6,12 @@ const initState = {
     height:'100vh',
     overflow:false,
     config:{
-        header:{visiabled:false,width:'',height:'50px',fixed: false,zIndex:10},
-        left:{visiabled:false,width:'134px',height:'',fixed: false,zIndex:10},
-        right:{visiabled:false,width:'87px',height:'',fixed: false,zIndex:10},
-        content_header:{visiabled:false,width:'',height:'36px',fixed: false,zIndex:10},
+        header:{visiabled:true,width:'',height:'50px',fixed: false,zIndex:10},
+        left:{visiabled:true,width:'134px',height:'',fixed: false,zIndex:10},
+        right:{visiabled:true,width:'87px',height:'',fixed: false,zIndex:10},
+        content_header:{visiabled:true,width:'',height:'36px',fixed: false,zIndex:10},
         content:{visiabled:true,width:'',height:'',fixed: false,zIndex:10},
-        bottom:{visiabled:false,width:'',height:'50px',fixed: false,zIndex:10}
+        bottom:{visiabled:true,width:'',height:'50px',fixed: false,zIndex:10}
     }
 };
 

@@ -14,12 +14,12 @@ import './index.less';
 class LayoutBoilerplate extends React.Component {
     render() {
       return (<Layout {...this.props}>
+                <Content/>
                 <Header/>
                 <Left/>
                 <Right  />
                 <Bottom/>
                 <ContentHeader/>
-                <Content/>
              </Layout>
         )
     }

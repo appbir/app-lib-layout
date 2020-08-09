@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack  --config  webpack.config.js -w --progress  --colors",
+    "publish": "webpack  --config  webpack.publish.js --progress  --colors",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -54,7 +55,7 @@
     "redux-thunk": "2.2.0",
     "redux-undo": "0.6.1",
     "style-loader": "0.19.0",
-    "uglifyjs-webpack-plugin": "1.1.1",
+    "uglifyjs-webpack-plugin": "^1.1.1",
     "url": "0.11.0",
     "url-loader": "0.6.2",
     "webpack": "4.20.2",
@@ -67,7 +68,7 @@
   "homepage": "https://github.com/appbir/app-layout#readme",
   "dependencies": {
     "antd": "3.5.4",
-    "appbir-layout": "^1.0.5",
+    "appbir-layout": "^2.0.2",
     "core-js": "2.5.7",
     "moment": "2.22.2"
   }
