@@ -8,14 +8,14 @@ const config = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        // entry:'./src/core/index.js', // old
+        // index: './demo02/test.js',
         index: './demo02/index.js',
         'c-react': ['react', 'react-dom'],
         'antd': ['antd'],
         'appbir-layout':['appbir-layout']
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, '../docs')
     },
     devServer: {
@@ -72,7 +72,7 @@ const config = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['../docs']),
+        new CleanWebpackPlugin(['./docs/']), // 文件路径一定在工程内部  否则不能删除
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),

@@ -252,6 +252,12 @@ var Layout = function Layout(_ref) {
             flexDirection: mainIsRow ? 'row' : 'column',
             position: model == POSITION.FULL ? 'static' : 'relative'
         }, style);
+
+        // 非全屏模式不设置制动
+        if (!isFullModel) {
+            mainStyle.minHeight = '0px';
+        }
+
         styles.push({ name: PARTS.MAIN_CONTAINER, style: mainStyle, parent: null });
 
         // 指针节点

@@ -4,12 +4,14 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
-    mode:'development',
+    mode: 'development',
     devtool: 'inline-source-map',
     // entry:'./src/core/index.js', // old
-    entry:'./demo02/index.js',
+    entry: {
+        index:'./demo02/index.js',
+    },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, '../docs')
     },
     devServer: {
@@ -18,50 +20,50 @@ const config = {
     },
     module: {
         rules: [{
-                test: /\.(js|jsx)$/,
-                use: {
-                    loader: 'babel-loader',                    
-                    options: {
-                        presets: ['env', 'react','stage-0'],
-                        plugins: [require('babel-plugin-transform-object-rest-spread')]
-                    }
-                },                
-                include: [
-                    path.join(__dirname, 'src'),
-                    path.join(__dirname, 'demo02')
-                ],
-                exclude: /(aaa)/
+            test: /\.(js|jsx)$/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['env', 'react', 'stage-0'],
+                    plugins: [require('babel-plugin-transform-object-rest-spread')]
+                }
             },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
-                test: /\.less$/,
-                use: [{
-                    loader: "style-loader"
-                }, {
-                    loader: "css-loader"
-                }, {
-                    loader: "less-loader"
-                }]
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {}
-                }]
-            },
-            {
-                test: /\.(woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=50000&name=[path][name].[ext]'
-            }
+            include: [
+                path.join(__dirname, 'src'),
+                path.join(__dirname, 'demo02')
+            ],
+            exclude: /(aaa)/
+        },
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        },
+        {
+            test: /\.less$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "less-loader"
+            }]
+        },
+        {
+            test: /\.(png|jpg|gif)$/,
+            use: [{
+                loader: 'url-loader',
+                options: {}
+            }]
+        },
+        {
+            test: /\.(woff|svg|eot|ttf)\??.*$/,
+            loader: 'url-loader?limit=50000&name=[path][name].[ext]'
+        }
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['../docs']),
-        new HTMLWebpackPlugin({title: 'appbir_layout',template:'./template.html'})
+        new CleanWebpackPlugin(['../docs']), // 采用开发模式与发布模式编译的文件一直 最后发布的时候直接替换到原有的开发文件 避免发布的包过大
+        new HTMLWebpackPlugin({ title: 'appbir_layout', template: './template.html' })
     ]
 };
 

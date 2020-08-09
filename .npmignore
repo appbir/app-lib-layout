@@ -6,3 +6,5 @@ __jest__/
 */package-lock.json
 */node_modules/
 example/
+docs/
+src/
