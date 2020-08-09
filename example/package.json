@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack  --config  webpack.config.js -w --progress  --colors",
-    "publish": "webpack  --config  webpack.publish.js --progress  --colors",
+    "publish": "webpack  --config  webpack.publish.js --progress  --colors -p",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +23,7 @@
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
+    "babel-plugin-import": "^1.13.0",
     "babel-plugin-syntax-jsx": "6.18.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",

@@ -1,6 +1,6 @@
 {
   "name": "appbir-layout",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "layout you PC web applation",
   "scripts": {
     "build": "npm run publish && npm run prod-umd && npm run dev-bundle && npm run prod-bundle",
@@ -60,14 +60,15 @@
     "url-loader": "0.6.2",
     "webpack": "3.10.0",
     "webpack-dev-server": "2.11.0",
-    "webpack-node-externals": "1.6.0"
+    "webpack-node-externals": "1.6.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2"
   },
   "bugs": {
     "url": "https://github.com/appbir/appbir-layout/issues"
   },
   "homepage": "https://github.com/appbir/appbir-layout#readme",
   "dependencies": {
-    "react": "16.5.2",
-    "react-dom": "16.5.2"
+
   }
 }

@@ -33,6 +33,7 @@ class LayoutBoilerplate extends React.Component {
                 width: '100vw',
                 height: '100vh',
             },
+            showConfig:false, // 显示配置文本格式
             overflow: false,
             config: {
                 header: { visiabled: true, width: '', height: '50px', fixed: false, zIndex: 10 },
@@ -66,7 +67,7 @@ class LayoutBoilerplate extends React.Component {
 
 
     render() {
-        let { config } = this.state;
+        let { config,showConfig } = this.state;
 
         return (
             <div >
@@ -76,7 +77,10 @@ class LayoutBoilerplate extends React.Component {
                         <ConfigPanel onChange={this.onChange}
                             onOverflow={this.onOverflow}
                             overflow={this.state.overflow}
-                            config={config} />
+                            config={config}
+                            onShowconfig={showConfig=>this.setState({showConfig})}
+                            showConfig={showConfig}
+                             />
                     </Content>
                     <Header />
                     <Left />

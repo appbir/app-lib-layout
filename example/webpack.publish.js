@@ -8,10 +8,11 @@ const config = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-           // entry:'./src/core/index.js', // old
-        entry:'./demo02/index.js',
+        // entry:'./src/core/index.js', // old
+        index: './demo02/index.js',
         'c-react': ['react', 'react-dom'],
-        'antd':['antd']
+        'antd': ['antd'],
+        'appbir-layout':['appbir-layout']
     },
     output: {
         filename: '[name].bundle.js',
@@ -28,7 +29,13 @@ const config = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react', 'stage-0'],
-                    plugins: [require('babel-plugin-transform-object-rest-spread')]
+                    plugins: [require('babel-plugin-transform-object-rest-spread'),  
+                    // antd 按需加载组件
+                    ["import", {
+                        "libraryName": "antd",
+                        "libraryDirectory": "es",
+                        "style": "css" // `style: true` 会加载 less 文件
+                    }]]
                 }
             },
             include: [
@@ -68,7 +75,8 @@ const config = {
         new CleanWebpackPlugin(['../docs']),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
-          }),
+        }),
+
         new UglifyJsPlugin(),
         new HTMLWebpackPlugin({ title: 'appbir_layout', template: './template.html' })
     ]

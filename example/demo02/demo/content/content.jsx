@@ -2,9 +2,11 @@ import React from 'react';
 import { Switch, Table,Select,Input,Col} from 'antd';
 import {POSITION} from 'appbir-layout';
 import Overflow from './overflow.jsx';
+import ShowConfig from './showConfig.jsx';
+
 const Option = Select.Option;
 
-const Content = ({onChange,config,overflow,onOverflow}) => {
+const Content = ({onChange,config,overflow,onOverflow,onShowconfig,showConfig}) => {
 
     const changeEle = (key,value)=>{
         onChange(key,value);
@@ -74,8 +76,12 @@ const Content = ({onChange,config,overflow,onOverflow}) => {
         }
       }];
     return (<div>
-        <center><Switch checkedChildren="overflow" unCheckedChildren="overflow" checked={overflow} onChange={onOverflow}/></center>
+        <center>
+          <Switch checkedChildren="overflow" unCheckedChildren="overflow" checked={overflow} onChange={onOverflow}/>
+          <Switch checkedChildren="json" unCheckedChildren="json" checked={showConfig} onChange={onShowconfig}/>
+        </center>
         <Table rowKey="name" columns={columns} pagination={false} dataSource={showTableData} />
+        {showConfig && <ShowConfig  content= {config}/>}
         {overflow && <Overflow/>}
     </div>)
 }
