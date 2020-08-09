@@ -60,7 +60,7 @@ const config = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['../docs']),
         new HTMLWebpackPlugin({title: 'appbir_layout',template:'./template.html'})
     ]
 };

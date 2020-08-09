@@ -1,6 +1,6 @@
 {
   "name": "appbir-layout",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "layout you PC web applation",
   "scripts": {
     "build": "npm run publish && npm run prod-umd && npm run dev-bundle && npm run prod-bundle",

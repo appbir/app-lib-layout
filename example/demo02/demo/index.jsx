@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Layout from 'appbir-layout';
-// import Layout from './layout.jsx';
+// import Layout from 'appbir-layout';
+import Layout from './layout.jsx';
 import ConfigPanel from './content/content.jsx';
 import Header from './part/header.jsx';
 import Left from './part/left.jsx';
@@ -73,7 +73,6 @@ class LayoutBoilerplate extends React.Component {
             <div >
                 < Layout config={config} >
                     <Content>
-                        {/* demo配置组件 */}
                         <ConfigPanel onChange={this.onChange}
                             onOverflow={this.onOverflow}
                             overflow={this.state.overflow}
@@ -83,7 +82,7 @@ class LayoutBoilerplate extends React.Component {
                              />
                     </Content>
                     <Header />
-                    <Left />
+                     <Left />
                     <Right />
                     <Bottom />
                     <ContentHeader />

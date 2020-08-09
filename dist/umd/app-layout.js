@@ -491,6 +491,11 @@ var Layout = function Layout(_ref) {
     // 转换子节点到树
     var childrenToTree = function childrenToTree(children, name) {
         var tree = {};
+        if (!children) return tree;
+        if (!Array.isArray(children)) {
+            // 兼容react单个子元素是对象
+            children = [children];
+        }
         children.map(function (child, index) {
             var tName = child.props[name] || ORDER[index];
             tree[tName] = child;
