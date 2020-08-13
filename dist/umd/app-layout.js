@@ -564,7 +564,7 @@ var Layout = function Layout(_ref) {
     return createDom(styleTree, childrenMap, cfg);
 };
 
-Layout.PropTypes = {
+Layout.propTypes = {
     classNamePrefix: _propTypes2.default.string, // 样式前缀 避免样式冲突
     targetName: _propTypes2.default.string, // 指定组件属于那部分 PARTS 对应的部分
     config: _propTypes2.default.object, // 各模块的布局配置

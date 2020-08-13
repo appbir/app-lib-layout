@@ -456,7 +456,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
     return createDom(styleTree, childrenMap, cfg)
 }
 
-Layout.PropTypes = {
+Layout.propTypes = {
     classNamePrefix: PropTypes.string, // 样式前缀 避免样式冲突
     targetName: PropTypes.string, // 指定组件属于那部分 PARTS 对应的部分
     config: PropTypes.object, // 各模块的布局配置
