@@ -3,7 +3,7 @@
  *  ---------------------
  *  如果想局部布局，则可以使用auto 或者diy模式 (TODO 该两种模式还未完全成熟)
  * 
- *  局部布局需要使用style传递对应的miniheight 最小高度  或者使用样式覆盖
+ *  局部布局需要使用style传递对应的mini height 最小高度  或者使用样式覆盖
  * 
  *  有必要场景可扩展排序规则
  */
@@ -96,15 +96,31 @@ const isFull = (name, config, isHeight) => {
         (isHeight ? config[name].height === POSITION.FULL : config[name].width === POSITION.FULL)
 }
 
+const defaultConfig = {
+    header: { visible: true, width: '', height: '50px', fixed: false, zIndex: 10 },
+    left: { visible: true, width: '134px', height: '', fixed: false, zIndex: 10 },
+    right: { visible: true, width: '87px', height: '', fixed: false, zIndex: 10 },
+    content_header: { visible: true, width: '', height: '36px', fixed: false, zIndex: 10 },
+    content: { visible: true, width: '', height: '', fixed: false, zIndex: 10 },
+    bottom: { visible: true, width: '', height: '50px', fixed: false, zIndex: 10 }
+};
 
-const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName', config = {}, children, style = {}, model = POSITION.FULL }) => {
+
+
+const Layout = ({ classNamePrefix = 'app-layout-',
+ targetName = 'targetName', config:userCfg, children, style = {}, model = POSITION.FULL }) => {
+     let config = {...defaultConfig, ...userCfg};
+
+     console.log("组件内部接受到的参数userCfg:config",userCfg,config)
     // 是否为全屏模式
     let isFullModel = model === POSITION.FULL;
     let cfg = {};
     for (let name in config) {
         let partCfg = config[name];
-        partCfg.visiabled && (cfg[name] = partCfg)
+        partCfg.visible && (cfg[name] = partCfg)
     }
+
+    console.log("可见的配置",cfg);
 
     /**
      * 根据模型 返回固定位置类型
@@ -124,7 +140,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
         // 是否为纵向布局
         let mainIsRow = !isFull(PARTS.HEADER, cfg) ?
             (isFull(PARTS.LEFT, cfg, true) + isFull(PARTS.RIGHT, cfg, true)) ? true : false : false;
-        // ------------------------------main conrainer--------------------------------------
+        // ------------------------------main container--------------------------------------
         let mainStyle = {
             // 1: tips 如果指定宽度  则flex 在overflow后会出现横向的滚动条
             // 2: tips 如果指定高度  则超出宽度不会被布局
@@ -147,7 +163,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
         // 指针节点
         let parentNode = PARTS.MAIN_CONTAINER;
 
-        // ------------------------------left_right conrainer--------------------------------------
+        // ------------------------------left_right container--------------------------------------
         let mainNode = PARTS.MAIN_CONTAINER;
         let rightNode = '';
         let leftNode = '';
@@ -203,7 +219,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
         }
 
 
-        // ------------------------------left or right conrainer--------------------------------------
+        // ------------------------------left or right container--------------------------------------
         if (cfg[PARTS.LEFT] || cfg[PARTS.RIGHT]) {
             if (mainIsRow && isFull(PARTS.LEFT, cfg, true) && isFull(PARTS.RIGHT, cfg, true)) {
                 rightNode = mainNode;
@@ -257,7 +273,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
             styles.push({ name: PARTS.LEFT, parent: lNode, style: leftStyle })
         }
 
-        //   ------------------------------right conrainer--------------------------------------
+        //   ------------------------------right container--------------------------------------
         if ((isFull(PARTS.LEFT, cfg, true) + isFull(PARTS.RIGHT, cfg, true) === 1) && cfg[PARTS.BOTTOM] && cfg[PARTS.RIGHT] && cfg[PARTS.LEFT]) {
             let rightContainerStyle = {
                 flex: 1,
@@ -275,7 +291,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
 
 
 
-        // ------------------------------bottom conrainer--------------------------------------
+        // ------------------------------bottom container--------------------------------------
         if (isFull(PARTS.HEADER, cfg) && (isFull(PARTS.LEFT, cfg, true) + isFull(PARTS.RIGHT, cfg, true) === 1)
             && cfg[PARTS.BOTTOM] && cfg[PARTS.RIGHT]) {
             let bContainerStyle = {
@@ -421,6 +437,7 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
 
     // 转换子节点到树
     const childrenToTree = (children, name) => {
+        // 默认支持内容区域显示
         let tree = {};
         if (!children) return tree;
         if (!Array.isArray(children)) { // 兼容react单个子元素是对象
@@ -436,7 +453,9 @@ const Layout = ({ classNamePrefix = 'appbir-layout-', targetName = 'targetName',
     const createPart = (config, child, childrenMap) =>
         <div key={config.name}
             style={config.style}
-            className={classNamePrefix + config.name}>
+            className={classNamePrefix + config.name}
+            id={!config.includeId ? classNamePrefix + config.name : null}
+            >
             {child || childrenMap[config.name]}
         </div>
 
@@ -462,6 +481,7 @@ Layout.propTypes = {
     config: PropTypes.object, // 各模块的布局配置
     model: PropTypes.string, // POSITION 的三种状态  FULL 、AUTO 、DIY 默认FULL
     style: PropTypes.object,  // DIY 模式下的样式 控制layout的主体部分
+    includeId:PropTypes.bool, // 是否支持ID显示 主要用于便捷的ID使用 默认显示
 }
 
 export default Layout;
