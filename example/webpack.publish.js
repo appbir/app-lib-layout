@@ -8,11 +8,11 @@ const config = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        // index: './demo02/test.js',
-        index: './demo02/index.js',
+        // index: './demo/demo02/test.js',
+        // index: './demo/demo03/index.js',
+        index: './demo/demo04/index.js',
         'c-react': ['react', 'react-dom'],
-        'antd': ['antd'],
-        'appbir-layout':['appbir-layout']
+        'antd': ['antd']
     },
     output: {
         filename: '[name].js',
@@ -29,7 +29,7 @@ const config = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react', 'stage-0'],
-                    plugins: [require('babel-plugin-transform-object-rest-spread'),  
+                    plugins: [require('babel-plugin-transform-object-rest-spread'),
                     // antd 按需加载组件
                     ["import", {
                         "libraryName": "antd",

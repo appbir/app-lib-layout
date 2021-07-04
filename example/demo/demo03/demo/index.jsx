@@ -102,7 +102,8 @@ class LayoutBoilerplate extends React.Component {
 
             <div className="inner" style={outerEleStyle}>
                 {/* 避免flex布局污染 */}
-                < Layout config={config} style={_style} model={model} >
+                {/* < Layout config={config} style={_style} model={model} > */}
+                < Layout>
                     <Content>
                         <ConfigPanel onChange={this.onChange}
                             onOverflow={this.onOverflow}

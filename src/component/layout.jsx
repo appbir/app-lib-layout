@@ -111,7 +111,7 @@ const Layout = ({ classNamePrefix = 'app-layout-',
  targetName = 'targetName', config:userCfg, children, style = {}, model = POSITION.FULL }) => {
      let config = {...defaultConfig, ...userCfg};
 
-     console.log("组件内部接受到的参数userCfg:config",userCfg,config)
+    console.log("----组件内部接受到的参数userCfg:config",userCfg,config)
     // 是否为全屏模式
     let isFullModel = model === POSITION.FULL;
     let cfg = {};

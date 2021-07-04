@@ -8,7 +8,11 @@ const config = {
     devtool: 'inline-source-map',
     // entry:'./src/core/index.js', // old
     entry: {
-        index:'./demo02/index.js',
+        // demo02:'./demo/demo02/index.js',
+        // demo03:'./demo/demo03/index.js',
+        // demo04:'./demo/demo04/index.js',
+        indexContainer:'./demo/demo04/indexContainer.js',
+        
     },
     output: {
         filename: '[name].js',
@@ -29,8 +33,7 @@ const config = {
                 }
             },
             include: [
-                path.join(__dirname, 'src'),
-                path.join(__dirname, 'demo02')
+                path.join(__dirname, 'demo')
             ],
             exclude: /(aaa)/
         },
@@ -61,6 +64,7 @@ const config = {
         }
         ]
     },
+   
     plugins: [
         new CleanWebpackPlugin(['../docs']), // 采用开发模式与发布模式编译的文件一直 最后发布的时候直接替换到原有的开发文件 避免发布的包过大
         new HTMLWebpackPlugin({ title: 'appbir_layout', template: './template.html' })

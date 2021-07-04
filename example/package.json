@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack  --config  webpack.config.js -w --progress  --colors",
-    "publish": "webpack  --config  webpack.publish.js --progress  --colors -p",
-    "start": "webpack-dev-server",
+    "pub": "npm run umd && webpack  --config  webpack.publish.js --progress  --colors -p",
+    "server": "webpack-dev-server --config  webpack.config.js --hot --inline",
+    "umd": "webpack --config  webpack.umd.js --progress  --colors -p ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
