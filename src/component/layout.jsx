@@ -125,15 +125,16 @@ const Layout = ({ classNamePrefix = 'app-layout-',
     targetName = 'targetName', config: userCfg, children, style = {}, model = POSITION.AUTO }) => {
 
     let config = {};
-    if (userCfg && Object.prototype.toString.call(userCfg)==="[object Object]") {
+    if (userCfg && Object.prototype.toString.call(userCfg) === "[object Object]") {
         config.content = defaultConfig.content;
         for (let key in userCfg) {
             if (userCfg[key] && defaultConfig[key]) {
-                config[key] = {...defaultConfig[key], ...userCfg[key] };
+                config[key] = { ...defaultConfig[key], ...userCfg[key] };
             }
         }
     } else if (userCfg === undefined) {
         config = defaultConfig;
+        // model = POSITION.FULL;
     } else {
         config = {};
     }
@@ -460,14 +461,14 @@ const Layout = ({ classNamePrefix = 'app-layout-',
         }
 
         // styles 添加原生的属性
-        
+
         // styles.map(_style=>({ ...cfg[_style.name], ..._style}));
 
         let allPropsStyle = [];
-        styles.forEach(_style=>{
-            allPropsStyle.push({ ...cfg[_style.name], ..._style});
+        styles.forEach(_style => {
+            allPropsStyle.push({ ...cfg[_style.name], ..._style });
         });
-      
+
         return arrayToTree(allPropsStyle, { keyFiled: 'name' });
     }
 
@@ -491,7 +492,7 @@ const Layout = ({ classNamePrefix = 'app-layout-',
             style={config.style}
             className={[classNamePrefix + config.name].concat(config.className ? config.className : []).join(' ')}
             id={!config.includeId ? classNamePrefix + config.name : null
-            // 支持原有的属性
+                // 支持原有的属性
 
             }
         >

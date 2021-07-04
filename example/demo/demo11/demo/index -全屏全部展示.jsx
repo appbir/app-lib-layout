@@ -1,5 +1,5 @@
 /****************************************
- *   常见的两列布局
+ *  全部展示
  ****************************************
  */
 
@@ -69,19 +69,29 @@ class LayoutBoilerplate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      config: {
-        left: { width: '50%', className: "appbir" }, // 支持自定义属性
-      }
+      config:{
+        // left:{width:'50%',className:"appbir"}, // 支持自定义属性
+        left:{},
+        right:{},
+        
+      },
+      model:undefined,
     };
   }
   render() {
+    let {config} = this.state;
     return (
-      <div className="inner" style={{ width: "600px", height: "400px", background: "blue" }}>
-        <Layout config={this.state.config} >
-          <Left targetName="left" />
-          <Content targetName="content" />
+    
+        <Layout model="FULL">
+          <Left targetName="left"/>
+          <Content targetName="content"/>
+          <Right targetName="right"/>
+          <Top targetName="top"/>
+          <Bottom targetName="bottom"/>
+          <Header targetName="header"/>
+          <ContentHeader targetName="content_header"/>
         </Layout>
-      </div>
+      
     );
   }
 }
