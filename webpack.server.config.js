@@ -17,10 +17,10 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const config = {
     devtool: 'inline-source-map',
     entry: {
-        'demo04': path.join(__dirname, './example/demo/demo04/index.js'), // appbir-site使用案列
+        // 'demo04': path.join(__dirname, './example/demo/demo04/index.js'), // appbir-site使用案列
         // -----------简单的使用案列------------------------------------
         // 'demo10': path.join(__dirname, './example/demo/demo10/index.js'),
-        // 'demo11': path.join(__dirname, './example/demo/demo11/index.js'),
+        'demo11': path.join(__dirname, './example/demo/demo11/index.js'),
     },
     output: {
         path:path.join(__dirname, './dist'),

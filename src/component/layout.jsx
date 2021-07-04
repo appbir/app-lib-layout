@@ -122,7 +122,7 @@ const defaultConfig = {
  */
 
 const Layout = ({ classNamePrefix = 'app-layout-',
-    targetName = 'targetName', config: userCfg, children, style = {}, model = POSITION.FULL }) => {
+    targetName = 'targetName', config: userCfg, children, style = {}, model = POSITION.AUTO }) => {
 
     let config = {};
     if (userCfg && Object.prototype.toString.call(userCfg)==="[object Object]") {
@@ -458,7 +458,17 @@ const Layout = ({ classNamePrefix = 'app-layout-',
             }
             styles.push({ name: PARTS.BOTTOM, parent: bottomNode, style: bottomStyle })
         }
-        return arrayToTree(styles, { keyFiled: 'name' });
+
+        // styles 添加原生的属性
+        
+        // styles.map(_style=>({ ...cfg[_style.name], ..._style}));
+
+        let allPropsStyle = [];
+        styles.forEach(_style=>{
+            allPropsStyle.push({ ...cfg[_style.name], ..._style});
+        });
+      
+        return arrayToTree(allPropsStyle, { keyFiled: 'name' });
     }
 
     // 转换子节点到树
@@ -479,8 +489,11 @@ const Layout = ({ classNamePrefix = 'app-layout-',
     const createPart = (config, child, childrenMap) =>
         <div key={config.name}
             style={config.style}
-            className={classNamePrefix + config.name}
-            id={!config.includeId ? classNamePrefix + config.name : null}
+            className={[classNamePrefix + config.name].concat(config.className ? config.className : []).join(' ')}
+            id={!config.includeId ? classNamePrefix + config.name : null
+            // 支持原有的属性
+
+            }
         >
             {child || childrenMap[config.name]}
         </div>
@@ -505,6 +518,16 @@ Layout.propTypes = {
     classNamePrefix: PropTypes.string, // 样式前缀 避免样式冲突
     targetName: PropTypes.string, // 指定组件属于那部分 PARTS 对应的部分
     config: PropTypes.object, // 各模块的布局配置
+    /**
+     * visible : 是否显示，
+     * width：宽度
+     * height：高度
+     * fixed：是否固定
+     * zIndex：固定的悬浮层
+     * className: 自定义className
+     * ... react原生支持的属性
+     * 
+     */
     model: PropTypes.string, // POSITION 的三种状态  FULL 、AUTO 、DIY 默认FULL
     style: PropTypes.object,  // DIY 模式下的样式 控制layout的主体部分
     includeId: PropTypes.bool, // 是否支持ID显示 主要用于便捷的ID使用 默认显示

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Layout, { POSITION } from "@layout";
-
+import "./index.less"
 import Left from "./part/left.jsx";
+import Right from "./part/right.jsx";
 import Content from "./part/content.jsx";
 
 let defaultConfig = {
@@ -59,19 +60,23 @@ class LayoutBoilerplate extends React.Component {
     super(props);
     this.state = {
       config:{
-        left:{},
-        // content:{},
+        // left:{width:'50%',className:"appbir"}, // 支持自定义属性
+        left:{width:'40%',className:"appbir"},
+        right:{width:'40%',className:"appbir"},
+        
       },
+      model:undefined,
     };
   }
   render() {
-    let {config} = this.state;
+    let {config,model} = this.state;
     return (
-      <div className="inner" style={{width:"600px",hight:"400px"}}>
-        <Layout  config={config} model={"AUTO"} style={{width:"600px",hight:"400px"}}>
+      // 外层的的样式
+      <div className="inner" style={{width:"600px",height:"400px",background: "blue"}}> 
+        <Layout  config={config} model={model}>
           <Left targetName="left"/>
           <Content targetName="content"/>
-          <Content/>
+          <Right targetName="right"/>
         </Layout>
       </div>
     );
