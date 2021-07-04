@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Layout, { POSITION } from "@layout";
 
 import Left from "./part/left.jsx";
-import Right from "./part/right.jsx";
+import Content from "./part/content.jsx";
 
 let defaultConfig = {
   model: "FULL", // DIY 模型支持自定义宽度和高度 FULL 表示全浏览器满屏  默认FULL
@@ -58,16 +58,20 @@ class LayoutBoilerplate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      config:{},
+      config:{
+        left:{},
+        // content:{},
+      },
     };
   }
   render() {
     let {config} = this.state;
     return (
-      <div className="inner" style={{}}>
-        <Layout config={config}>
-          <Left />
-          <Right />
+      <div className="inner" style={{width:"600px",hight:"400px"}}>
+        <Layout  config={config} model={"AUTO"} style={{width:"600px",hight:"400px"}}>
+          <Left targetName="left"/>
+          <Content targetName="content"/>
+          <Content/>
         </Layout>
       </div>
     );

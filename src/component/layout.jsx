@@ -106,12 +106,38 @@ const defaultConfig = {
 };
 
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ * 
+ * config 属性详细描述 undefined 表示全部显示 即默认
+ * null   表示什么也不显示
+ * {}     表示只显示一个内容模块
+ * {
+ *  header:{XXX},
+ *  content:{XXX}
+ * }      表示显示指定的块
+ * 
+ */
 
 const Layout = ({ classNamePrefix = 'app-layout-',
- targetName = 'targetName', config:userCfg, children, style = {}, model = POSITION.FULL }) => {
-     let config = {...defaultConfig, ...userCfg};
+    targetName = 'targetName', config: userCfg, children, style = {}, model = POSITION.FULL }) => {
 
-    console.log("----组件内部接受到的参数userCfg:config",userCfg,config)
+    let config = {};
+    if (userCfg && Object.prototype.toString.call(userCfg)==="[object Object]") {
+        config.content = defaultConfig.content;
+        for (let key in userCfg) {
+            if (userCfg[key] && defaultConfig[key]) {
+                config[key] = {...defaultConfig[key], ...userCfg[key] };
+            }
+        }
+    } else if (userCfg === undefined) {
+        config = defaultConfig;
+    } else {
+        config = {};
+    }
+
     // 是否为全屏模式
     let isFullModel = model === POSITION.FULL;
     let cfg = {};
@@ -120,7 +146,7 @@ const Layout = ({ classNamePrefix = 'app-layout-',
         partCfg.visible && (cfg[name] = partCfg)
     }
 
-    console.log("可见的配置",cfg);
+    console.log("可见的配置", cfg);
 
     /**
      * 根据模型 返回固定位置类型
@@ -455,7 +481,7 @@ const Layout = ({ classNamePrefix = 'app-layout-',
             style={config.style}
             className={classNamePrefix + config.name}
             id={!config.includeId ? classNamePrefix + config.name : null}
-            >
+        >
             {child || childrenMap[config.name]}
         </div>
 
@@ -481,7 +507,7 @@ Layout.propTypes = {
     config: PropTypes.object, // 各模块的布局配置
     model: PropTypes.string, // POSITION 的三种状态  FULL 、AUTO 、DIY 默认FULL
     style: PropTypes.object,  // DIY 模式下的样式 控制layout的主体部分
-    includeId:PropTypes.bool, // 是否支持ID显示 主要用于便捷的ID使用 默认显示
+    includeId: PropTypes.bool, // 是否支持ID显示 主要用于便捷的ID使用 默认显示
 }
 
 export default Layout;

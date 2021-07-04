@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import Layout, { POSITION } from 'app-lib-layout';
-import Layout, { POSITION } from "./layout.jsx";
-// import Layout, { POSITION } from '../../.../../src/component/layout.jsx';
+import Layout, { POSITION } from "@layout";
 import ConfigPanel from "./content/content.jsx";
 import Header from "./part/header.jsx";
 import Left from "./part/left.jsx";
@@ -187,6 +185,7 @@ class LayoutBoilerplate extends React.Component {
               layoutConfigs={layoutConfigs}
               selectLayout={layoutName}
               tips={tips}
+              _style={_style}
               onLayoutNameChange={layoutName=>{
                 let layoutChangeConfig = getChangeLayout && getChangeLayout(layoutName);
                 let tips = "";

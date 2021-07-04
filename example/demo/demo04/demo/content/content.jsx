@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Table, Select, Input,Button } from "antd";
-import Layout, { POSITION } from '../layout.jsx';
+import Layout, { POSITION } from '@layout';
 import Overflow from "./overflow.jsx";
 import ShowConfig from "./showConfig.jsx";
 
@@ -49,7 +49,8 @@ const Content = ({
   layoutConfigs,
   selectLayout,
   onLayoutNameChange,
-  tips
+  tips,
+  _style
 }) => {
   const changeEle = (key, value) => {
     onChange(key, value);
@@ -245,7 +246,7 @@ const Content = ({
         pagination={false}
         dataSource={showTableData}
       />
-      {showConfig && <ShowConfig config={config} />}
+      {showConfig && <ShowConfig config={config} otherConfig={{model,style:_style}} />}
       {overflow && <Overflow />}
     </div>
   );

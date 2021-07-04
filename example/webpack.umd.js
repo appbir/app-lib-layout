@@ -62,6 +62,13 @@ const config = {
         }
         ]
     },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'], // 不用编写的后缀
+        alias: {
+            // 配置快捷使用
+            "@layout": path.resolve(__dirname, '../src/index.js'),
+        }
+    },
     plugins: [
         new CleanWebpackPlugin(['./docs/']), // 文件路径一定在工程内部  否则不能删除
         new webpack.DefinePlugin({
