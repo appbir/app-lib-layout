@@ -6,7 +6,6 @@ import Left from "./part/left.jsx";
 import Right from "./part/right.jsx";
 import Bottom from "./part/bottom.jsx";
 import ContentHeader from "./part/content_header.jsx";
-import "antd/dist/antd.css";
 import "./index.less";
 
 const Content = ({ children }) => {
@@ -101,8 +100,10 @@ class LayoutBoilerplate extends React.Component {
   };
 
   onChange = (key, value) => {
+    
     let { config } = this.state;
     let newConfig = clone(config || {});
+    debugger;
     set(newConfig, key, value);
     this.setState({ config: newConfig });
   };
